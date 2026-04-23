@@ -23,12 +23,8 @@ app.use('/mcp', async (c, next) => {
   await next();
 });
 
-app.get('/', (c) => {
-  return c.json({
-    name: 'bluesky-mcp-server',
-    status: 'ok',
-    endpoints: ['/mcp'],
-  });
+app.get('/', () => {
+  return Response.redirect('https://github.com/shade-solutions/bluesky-mcp-server', 302);
 });
 
 app.get('/health', (c) => c.json({ ok: true }));

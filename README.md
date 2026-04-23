@@ -58,6 +58,8 @@ Deployed URL:
 
 https://bluesky-mcp-server.shraj.workers.dev
 
+The root URL redirects to this repository on GitHub; use `/mcp` for MCP clients.
+
 ## Client Setup
 
 Copy-paste setup guides for IDEs and desktop clients live in [docs/clients.md](docs/clients.md).
