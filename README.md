@@ -95,6 +95,23 @@ Add this to your Cursor MCP config:
 }
 ```
 
+For authenticated tools (post, reply, like, etc.), pass headers:
+
+```json
+{
+  "x-bluesky-identifier": "your.handle.bsky.social",
+  "x-bluesky-app-password": "your-app-password"
+}
+```
+
+If your client asks for a server URL override, use:
+
+```json
+{
+  "x-bluesky-service-url": "https://bsky.social"
+}
+```
+
 ## Agent Setup
 
 Copy-paste setup guides for agent-style clients live in [docs/agents.md](docs/agents.md).

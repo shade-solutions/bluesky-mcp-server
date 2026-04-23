@@ -64,6 +64,17 @@ Cursor can use the same MCP server URL directly:
 }
 ```
 
+If your client supports custom headers, add these for authenticated tools:
+
+```json
+{
+  "x-bluesky-identifier": "your.handle.bsky.social",
+  "x-bluesky-app-password": "your-app-password"
+}
+```
+
+Use an app password from Bluesky settings, not your account login password.
+
 ## LobeHub
 
 LobeHub can point to the remote MCP server with the same URL:
@@ -78,6 +89,18 @@ LobeHub can point to the remote MCP server with the same URL:
 }
 ```
 
+In LobeHub, set:
+
+- Streamable HTTP Endpoint URL: `https://bluesky-mcp-server.shraj.workers.dev/mcp`
+- Auth type: `No auth`
+- Advanced > HTTP Headers:
+  - `x-bluesky-identifier`: `your.handle.bsky.social`
+  - `x-bluesky-app-password`: `your-app-password`
+
+Optional custom server:
+
+- `x-bluesky-service-url`: `https://bsky.social`
+
 ## Codex
 
 If you are connecting Codex or another OpenAI-style coding agent that accepts MCP URLs, use:
@@ -89,6 +112,15 @@ If you are connecting Codex or another OpenAI-style coding agent that accepts MC
       "url": "https://bluesky-mcp-server.shraj.workers.dev/mcp"
     }
   }
+}
+```
+
+For authenticated actions, provide the same headers:
+
+```json
+{
+  "x-bluesky-identifier": "your.handle.bsky.social",
+  "x-bluesky-app-password": "your-app-password"
 }
 ```
 
