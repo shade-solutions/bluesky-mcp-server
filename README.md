@@ -32,6 +32,23 @@ Set these as Cloudflare Worker secrets or vars:
 - `BLUESKY_SERVICE_URL` - optional custom PDS/service URL
 - `BLUESKY_PDS_URL` - optional alias for the service URL
 
+You can also pass per-request credentials using headers (useful for multi-user clients):
+
+- `x-bluesky-identifier`
+- `x-bluesky-app-password` (preferred) or `x-bluesky-password`
+- `x-bluesky-service-url` or `x-bluesky-pds-url`
+
+Example:
+
+```bash
+curl -X POST "https://bluesky-mcp-server.shraj.workers.dev/mcp" \
+  -H "content-type: application/json" \
+  -H "x-bluesky-identifier: your.handle.bsky.social" \
+  -H "x-bluesky-app-password: your-app-password" \
+  -H "x-bluesky-service-url: https://bsky.social" \
+  -d '{"jsonrpc":"2.0","id":1,"method":"tools/list"}'
+```
+
 Example:
 
 ```bash
@@ -63,6 +80,20 @@ The root URL redirects to this repository on GitHub; use `/mcp` for MCP clients.
 ## Client Setup
 
 Copy-paste setup guides for IDEs and desktop clients live in [docs/clients.md](docs/clients.md).
+
+### Cursor
+
+Add this to your Cursor MCP config:
+
+```json
+{
+  "mcpServers": {
+    "bluesky": {
+      "url": "https://bluesky-mcp-server.shraj.workers.dev/mcp"
+    }
+  }
+}
+```
 
 ## Agent Setup
 

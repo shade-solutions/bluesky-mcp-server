@@ -9,6 +9,30 @@ type Variables = {
   parsedBody?: unknown;
 };
 
+function pickHeader(headers: Headers, keys: string[]): string | undefined {
+  for (const key of keys) {
+    const value = headers.get(key);
+    if (value && value.trim().length > 0) {
+      return value.trim();
+    }
+  }
+
+  return undefined;
+}
+
+function envFromHeaders(headers: Headers): Partial<BlueskyEnv> {
+  return {
+    BLUESKY_IDENTIFIER: pickHeader(headers, ['x-bluesky-identifier', 'bluesky-identifier']),
+    BLUESKY_APP_PASSWORD: pickHeader(headers, [
+      'x-bluesky-app-password',
+      'bluesky-app-password',
+    ]),
+    BLUESKY_PASSWORD: pickHeader(headers, ['x-bluesky-password', 'bluesky-password']),
+    BLUESKY_SERVICE_URL: pickHeader(headers, ['x-bluesky-service-url', 'bluesky-service-url']),
+    BLUESKY_PDS_URL: pickHeader(headers, ['x-bluesky-pds-url', 'bluesky-pds-url']),
+  };
+}
+
 const app = new Hono<{ Bindings: Bindings; Variables: Variables }>();
 
 app.use('/mcp', async (c, next) => {
@@ -30,7 +54,15 @@ app.get('/', () => {
 app.get('/health', (c) => c.json({ ok: true }));
 
 app.all('/mcp', async (c) => {
-  const service = new BlueskyService(c.env);
+  const headerEnv = envFromHeaders(c.req.raw.headers);
+  const requestEnv: BlueskyEnv = {
+    ...c.env,
+    ...Object.fromEntries(
+      Object.entries(headerEnv).filter(([, value]) => typeof value === 'string' && value.length > 0),
+    ),
+  };
+
+  const service = new BlueskyService(requestEnv);
   const server = buildMcpServer(service);
   const transport = new WebStandardStreamableHTTPServerTransport({
     sessionIdGenerator: undefined,
