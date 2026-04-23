@@ -144,3 +144,9 @@ See [SECURITY.md](SECURITY.md) for responsible disclosure guidance.
 ## Inspiration
 
 This server was shaped by common tool surfaces in Bluesky and AT Protocol MCP projects such as `brianellin/bsky-mcp-server`, `semioz/bluesky-mcp`, and `cameronrye/atproto-mcp`.
+
+## Sponsored / Created By
+
+Sponsored/created by [IndexFast](https://www.indexfast.co/).
+
+Follow us on Bluesky: [indexfast.bsky.social](https://bsky.app/profile/indexfast.bsky.social)
