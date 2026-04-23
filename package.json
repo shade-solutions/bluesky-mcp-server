@@ -3,6 +3,7 @@
   "private": true,
   "version": "0.1.0",
   "description": "Bluesky MCP server for Cloudflare Workers using Hono.",
+  "license": "MIT",
   "type": "module",
   "scripts": {
     "dev": "wrangler dev",
