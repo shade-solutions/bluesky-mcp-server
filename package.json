@@ -1,16 +1,24 @@
 {
-	"name": "bluesky-mcp-server",
-	"type": "module",
-	"scripts": {
-		"dev": "wrangler dev",
-		"deploy": "wrangler deploy --minify",
-		"cf-typegen": "wrangler types --env-interface CloudflareBindings"
-	},
-	"dependencies": {
-		"hono": "^4.12.14"
-	},
-	"devDependencies": {
-		"@types/node": "^25.6.0",
-		"wrangler": "^4.84.1"
-	}
+  "name": "bluesky-mcp-server",
+  "private": true,
+  "version": "0.1.0",
+  "description": "Bluesky MCP server for Cloudflare Workers using Hono.",
+  "type": "module",
+  "scripts": {
+    "dev": "wrangler dev",
+    "build": "tsc -p tsconfig.json",
+    "typecheck": "tsc -p tsconfig.json --noEmit",
+    "deploy": "wrangler deploy"
+  },
+  "dependencies": {
+    "@atproto/api": "0.19.11",
+    "@modelcontextprotocol/sdk": "1.29.0",
+    "hono": "4.12.14",
+    "zod": "4.3.6"
+  },
+  "devDependencies": {
+    "@cloudflare/workers-types": "^4.20260423.0",
+    "typescript": "^5.8.3",
+    "wrangler": "^4.20.0"
+  }
 }
